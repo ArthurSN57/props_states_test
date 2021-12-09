@@ -1,0 +1,7 @@
+-  request:
+      url: /api/pessoas
+      method: GET
+   response:
+      file: jsons/pessoas.json
+      headers:
+         content-type: application/json
