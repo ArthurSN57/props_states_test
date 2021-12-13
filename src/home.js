@@ -18,7 +18,8 @@ export default class Home extends Component {
             response = await fetch("http://localhost:3001/people");
         } catch(error){ console.log('error', error); }
 
-        console.log('peopleList', response);
+        let peopleList = await response.json();
+        this.setState({peopleList});
     }
 
     handleOpenModal = () => {
@@ -43,11 +44,15 @@ export default class Home extends Component {
                       <th>Contato</th> 
                       <th>País</th>
                     </tr>
-                    <tr>
-                      <td>Mobicity</td>
-                      <td>Arthur</td> 
-                      <td>Brasil</td>
-                    </tr>
+                    {(this.state.peopleList || []).map(person => {
+                        return (
+                            <tr>
+                                <td>{person.company}</td>
+                                <td>{person.name}</td> 
+                                <td>{person.country}</td>
+                            </tr>
+                        );
+                    })}
                   </table>
                   <button style={{height: "30px", width: "100px", float: "right", marginTop: "10px"}} onClick={this.handleOpenModal}>Inserir novo</button>
                 </div>
